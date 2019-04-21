@@ -46,11 +46,6 @@ args = vars(ap.parse_args())
 
 output_name = [args['output_layer']]
 
-# ['global_average_pooling2d_1/Mean']
-#graph = load_graph('./preT.pb')
-
-#uff.from_tensorflow_frozen_model('./preT.pb', output_nodes=output_name, output_filename='./preT.uff', text=True, quiet=False, list_nodes=True, debug_mode=True)
-
 uff.from_tensorflow_frozen_model(args['model_path'], output_nodes=output_name, output_filename=args['uff'], text=True)
 
 # Define global logger object (it should be a singleton,
@@ -79,8 +74,5 @@ inputs, outputs, bindings, stream = allocate_buffers(engine)
 
 context = engine.create_execution_context()
 
-# TODO load_normalized_test_case with one face as load_normalized_test_case(inputs[0].host, test_img)
-# TODO do the inference with [pred] = do_inference(context, bindings=bindings, inputs=inputs, outputs=outputs, stream=stream)
-# TODO add support for int32 models
 
 
